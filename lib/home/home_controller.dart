@@ -15,6 +15,21 @@ class HomeController extends GetxController {
   final Completer<WebViewController> completerController =
       Completer<WebViewController>();
 
+  final String replaceHtml = '</head>';
+  final String replacedHtml =
+      '<style type="text/css">footer {display: none;}.navbar-collapse '
+      '{position: fixed;top: 70px;left: 0;padding-left: 15px;'
+      'padding-right: 15px;padding-bottom: 15px;width: 75%;height: 100%;'
+      'width: 90% !important; -webkit-transition: all 0.4s ease; '
+      '-moz-transition: all 0.4s ease;transition: all 0.4s ease;}'
+      '.navbar-collapse.collapsing {left: -75%;}.navbar-collapse.show '
+      '{left: 0;}nav.navbar.bootsnav ul.nav>li>a {font-size: 18px;}'
+      'nav.navbar.bootsnav .navbar-nav>li>a{padding: 25px 0 !important;'
+      'border: 0 !important;}nav.navbar.bootsnav.no-full .navbar-collapse'
+      '{max-height: none;overflow-y: hidden !important;}nav.navbar'
+      '.navbar-default.navbar-regular.navbar-common.bootsnav.view-btn'
+      '.on.no-full{position: fixed;}</style></head>';
+
   RxString changeUrl = ''.obs;
 
   static const String homeContent = 'homeContent';
@@ -75,6 +90,7 @@ class HomeController extends GetxController {
     } else {
       htmlContent = prefs.getString(homeContent);
     }
+    htmlContent = htmlContent!.replaceAll(replaceHtml, replacedHtml);
     return htmlContent ?? '';
   }
 
